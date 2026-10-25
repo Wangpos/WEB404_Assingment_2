@@ -1,0 +1,2 @@
+Welcome to the WEB404 Web CLI sandbox.
+Only files in this directory can be read in secure mode.

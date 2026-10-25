@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web CLI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Web CLI <span class="sub">WEB404 Practical 2: Command Injection</span></h1>
+    <div class="modes" role="radiogroup" aria-label="Execution mode">
+      <label class="mode secure"><input type="radio" name="mode" value="secure" checked> Secure mode</label>
+      <label class="mode vulnerable"><input type="radio" name="mode" value="vulnerable"> Vulnerable mode</label>
+    </div>
+  </header>
+
+  <main>
+    <div id="banner" class="banner secure">
+      SECURE MODE: allowlisted commands, validated arguments, <code>execFile()</code> with no shell.
+    </div>
+
+    <section id="terminal" class="terminal" aria-live="polite">
+      <div id="output"></div>
+      <form id="prompt-form" autocomplete="off">
+        <label for="cmd" id="prompt-label" class="prompt">secure@web-cli:~$</label>
+        <input id="cmd" name="cmd" type="text" maxlength="200" spellcheck="false" autofocus>
+      </form>
+    </section>
+
+    <aside class="hints">
+      <h2>Try these</h2>
+      <div class="hint-group">
+        <h3>Normal use</h3>
+        <button type="button" data-cmd="help">help</button>
+        <button type="button" data-cmd="ping 127.0.0.1">ping 127.0.0.1</button>
+        <button type="button" data-cmd="nslookup example.com">nslookup example.com</button>
+        <button type="button" data-cmd="ls">ls</button>
+        <button type="button" data-cmd="cat welcome.txt">cat welcome.txt</button>
+      </div>
+      <div class="hint-group">
+        <h3>Injection payloads</h3>
+        <button type="button" data-cmd="ping 127.0.0.1; whoami">ping 127.0.0.1; whoami</button>
+        <button type="button" data-cmd="ping 127.0.0.1 && cat ../private/secrets.txt">… &amp;&amp; cat ../private/secrets.txt</button>
+        <button type="button" data-cmd="ping 127.0.0.1 | id">ping 127.0.0.1 | id</button>
+        <button type="button" data-cmd="echo $(whoami)">echo $(whoami)</button>
+        <button type="button" data-cmd="echo `uname -a`">echo `uname -a`</button>
+        <button type="button" data-cmd="ls ..; cat /etc/passwd">ls ..; cat /etc/passwd</button>
+        <button type="button" data-cmd="cat ../private/secrets.txt">cat ../private/secrets.txt</button>
+        <button type="button" data-cmd="ping -c 50 127.0.0.1">ping -c 50 127.0.0.1</button>
+      </div>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

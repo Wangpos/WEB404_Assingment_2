@@ -1,0 +1,2 @@
+Practical 2: Command injection.
+Safeguards: allowlist, input validation, execFile (no shell), least privilege.
